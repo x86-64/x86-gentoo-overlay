@@ -16,7 +16,10 @@ SLOT="1"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND="dev-util/frozen"
+DEPEND="
+	dev-util/frozen
+	dev-db/leveldb
+"
 RDEPEND="${DEPEND}"
 
 src_compile(){
