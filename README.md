@@ -13,6 +13,7 @@ Content
 
 * frozen
 * frozen-leveldb
+* frozen-mustache
 * leveldb
 * mustache-c
 
