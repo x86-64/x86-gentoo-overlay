@@ -3,7 +3,7 @@
 
 EAPI=4
 
-inherit git-2
+inherit git-2 eutils
 
 DESCRIPTION="Leveldb"
 HOMEPAGE="http://code.google.com/p/leveldb/"
@@ -17,8 +17,11 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
+src_prepare(){
+	epatch "${FILESDIR}"/${P}-pic.patch
+}
+
 src_compile(){
-	export CFLAGS="$CFLAGS -fPIC"
 	emake || die "Error: emake failed!"
 }
 
