@@ -24,6 +24,6 @@ RDEPEND="${DEPEND}"
 
 src_compile(){
 	eautoreconf
-	econf $(use_enable debug)
+	econf
 	emake || die "Error: emake failed!"
 }

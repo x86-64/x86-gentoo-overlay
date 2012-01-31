@@ -14,13 +14,12 @@ EGIT_REPO_URI="git://github.com/x86-64/mustache-c.git"
 LICENSE="|| ( LGPL-3 )"
 SLOT="1"
 KEYWORDS="amd64 x86"
-IUSE="frozen"
 
-DEPEND=" frozen? ( dev-util/frozen )"
+DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_compile(){
 	eautoreconf
-	econf $(use_enable debug)
+	econf
 	emake || die "Error: emake failed!"
 }
