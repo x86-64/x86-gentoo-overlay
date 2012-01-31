@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layman>
     <overlay name="x86" quality="experimental" status="unofficial"
-        type="git" src="git://github.com/x86/x86-gentoo-overlay.git">
+        type="git" src="git://github.com/x86-64/x86-gentoo-overlay.git">
         <link>//github.com/x86-64/x86-gentoo-overlay</link>
         <description> x86 Gentoo Overlay </description>
     </overlay>
