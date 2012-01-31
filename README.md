@@ -2,6 +2,17 @@ Installation
 ----------------
 
 	layman -o https://github.com/x86-64/x86-gentoo-overlay/raw/master/overlay.xml -f -a x86
-	layman -S
+
+Updates
+----------------
+	layman -s x86
 	emerge -av <packages>
+
+Content
+----------------
+
+* frozen
+* frozen-leveldb
+* leveldb
+* mustache-c
 
