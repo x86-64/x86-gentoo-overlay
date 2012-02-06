@@ -19,6 +19,7 @@ IUSE="debug fuse zeromq"
 DEPEND="
 	fuse? ( sys-fs/fuse )
 	zeromq? ( net-libs/zeromq )
+	dev-libs/check
 "
 RDEPEND="${DEPEND}"
 
