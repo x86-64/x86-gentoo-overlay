@@ -14,6 +14,7 @@ Content
 * frozen
 * frozen-leveldb
 * frozen-mustache
+* frozen-openssl
 * leveldb
 * mustache-c
 
