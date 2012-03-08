@@ -22,8 +22,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-src_compile(){
+src_prepare(){
 	eautoreconf
-	econf
-	emake || die "Error: emake failed!"
 }

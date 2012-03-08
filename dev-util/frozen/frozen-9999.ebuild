@@ -23,8 +23,10 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-src_compile(){
+src_prepare() {
 	eautoreconf
+}
+
+src_configure() {
 	econf $(use_enable debug)
-	emake || die "Error: emake failed!"
 }
