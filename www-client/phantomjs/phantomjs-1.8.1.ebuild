@@ -13,7 +13,10 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND=""
+RDEPEND="
+	media-libs/freetype
+	media-libs/fontconfig
+"
 DEPEND="${RDEPEND}"
 
 src_install() {
