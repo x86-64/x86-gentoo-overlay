@@ -1,0 +1,60 @@
+--- bin/dig/dighost.c2	2012-09-16 13:47:05.065009525 +0000
++++ bin/dig/dighost.c	2012-09-16 14:26:44.000550076 +0000
+@@ -525,11 +525,11 @@
+ 	vfprintf(stderr, format, args);
+ 	va_end(args);
+ 	fprintf(stderr, "\n");
+-	if (exitcode < 10)
+-		exitcode = 10;
+-	if (fatalexit != 0)
+-		exitcode = fatalexit;
+-	exit(exitcode);
++	//if (exitcode < 10)
++	//	exitcode = 10;
++	//if (fatalexit != 0)
++	//	exitcode = fatalexit;
++	//exit(exitcode);
+ }
+ 
+ void
+@@ -648,9 +648,11 @@
+ 
+ 	result = bind9_getaddresses(opt, 0, sockaddrs,
+ 				    DIG_MAX_ADDRESSES, &count);
+-	if (result != ISC_R_SUCCESS)
++	if (result != ISC_R_SUCCESS){
+ 		fatal("couldn't get address for '%s': %s",
+ 		      opt, isc_result_totext(result));
++		return;
++	}
+ 
+ 	flush_server_list();
+ 
+@@ -886,8 +888,10 @@
+ 	debug("requeue_lookup()");
+ 
+ 	lookup_counter++;
+-	if (lookup_counter > LOOKUP_LIMIT)
++	if (lookup_counter > LOOKUP_LIMIT){
+ 		fatal("too many lookups");
++		return NULL;
++	}
+ 
+ 	looknew = clone_lookup(lookold, servers);
+ 	INSIST(looknew != NULL);
+@@ -1816,6 +1820,7 @@
+ 	if (numLookups == 0 && addresses_result != ISC_R_SUCCESS) {
+ 		fatal("couldn't get address for '%s': %s",
+ 		      bad_namestr, isc_result_totext(result));
++		return 0;
+ 	}
+ 
+ 	if (lookup == NULL &&
+@@ -3575,6 +3580,7 @@
+ 
+ 	result = bind9_getaddresses(host, 0, sockaddrs,
+ 				    DIG_MAX_ADDRESSES, &count);
++	result = ISC_R_SUCCESS;
+ 	if (resultp != NULL)
+ 		*resultp = result;
+ 	if (result != ISC_R_SUCCESS) {

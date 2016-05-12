@@ -1,0 +1,25 @@
+diff -ur a/lib/Net/Whois/Raw/Common.pm b/lib/Net/Whois/Raw/Common.pm
+--- a/lib/Net/Whois/Raw/Common.pm	2013-09-19 20:07:56.000000000 +0400
++++ b/lib/Net/Whois/Raw/Common.pm	2013-10-28 10:18:12.000000000 +0400
+@@ -109,7 +109,7 @@
+ MAIN:
+         foreach (split(/\n/, $whois)) {
+             if ( $CHECK_FAIL && $notfound && /$notfound/ ) {
+-                return undef, "Not found";
++                return $whois, "Not found";
+             };
+ 
+             if ($OMIT_MSG) {
+diff -ur a/lib/Net/Whois/Raw.pm b/lib/Net/Whois/Raw.pm
+--- a/lib/Net/Whois/Raw.pm	2013-10-28 10:38:10.000000000 +0400
++++ b/lib/Net/Whois/Raw.pm	2013-10-28 10:38:20.000000000 +0400
+@@ -147,6 +147,9 @@
+             $whois_rec->{text} = $text;
+             push @processed_whois, $whois_rec;
+         }
++	if($error){
++	    $whois_rec->{error} = $error;
++	}
+         $level++;
+     }
+ 

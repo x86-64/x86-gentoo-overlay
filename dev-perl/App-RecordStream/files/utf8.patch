@@ -1,0 +1,11 @@
+diff -ur a//App-RecordStream-4.0.6/lib/App/RecordStream/OutputStream.pm work//App-RecordStream-4.0.6/lib/App/RecordStream/OutputStream.pm
+--- a/lib/App/RecordStream/OutputStream.pm	2014-06-19 11:17:13.577709670 +0400
++++ b/lib/App/RecordStream/OutputStream.pm	2014-06-19 11:20:33.873722107 +0400
+@@ -45,6 +45,7 @@
+ $json->allow_nonref(1);
+ $json->allow_blessed(1);
+ $json->convert_blessed(1);
++$json->utf8(1);
+ 
+ sub hashref_string {
+   my $record = shift;

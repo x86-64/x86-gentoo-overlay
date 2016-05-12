@@ -1,0 +1,13 @@
+--- htcondor-8_4_3/externals/bundles/glibc/CMakeLists.txt.old	2016-01-14 13:29:07.122640083 +0000
++++ htcondor-8_4_3/externals/bundles/glibc/CMakeLists.txt	2016-01-14 13:48:02.707595551 +0000
+@@ -212,8 +212,8 @@
+ 
+ 		set( VER 2.19-0ubuntu6 )
+ 		set( GLIBC_TARNAME glibc-2.19-0ubuntu6 )
+-		set( GLIBC_FLAGS export CC=x86_64-linux-gnu-gcc-4.8 && export CXX=x86_64-linux-gnu-g++-4.8 && export AUTOCONF=false )
+-		set( GLIBC_CONFIGURE ./configure --host=x86_64-linux-gnu --build=x86_64-linux-gnu --prefix=/usr --without-cvs --enable-add-ons=libidn,nptl --enable-profile --without-selinux --enable-stackguard-randomization --enable-obsolete-rpc "--with-pkgversion=Ubuntu EGLIBC 2.19-0ubuntu6" --with-bugurl=https://bugs.launchpad.net/ubuntu/+source/eglibc/+bugs --enable-pt_chown --with-headers=${GLIBC_BUILD_PREFIX}/debian/include --enable-kernel=2.6.24 --enable-multi-arch )
++		set( GLIBC_FLAGS export CC=x86_64-pc-linux-gnu-gcc && export CXX=x86_64-pc-linux-gnu-g++ && export AUTOCONF=false )
++		set( GLIBC_CONFIGURE ./configure --host=x86_64-linux-gnu --build=x86_64-linux-gnu --prefix=/usr --without-cvs --enable-add-ons=libidn,nptl --enable-profile --without-selinux --enable-stackguard-randomization --enable-obsolete-rpc "--with-pkgversion=Ubuntu EGLIBC 2.19-0ubuntu6" --with-bugurl=https://bugs.launchpad.net/ubuntu/+source/eglibc/+bugs --enable-pt_chown --enable-kernel=2.6.24 --enable-multi-arch )
+ 
+ 		set( GLIBC_MAKE make -r )
+ 

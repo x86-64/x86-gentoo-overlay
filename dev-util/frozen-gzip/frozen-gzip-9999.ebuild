@@ -1,7 +1,7 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v3
 
-EAPI=4
+EAPI=5
 WANT_AUTOCONF=2.5
 WANT_AUTOMAKE=1.11
 

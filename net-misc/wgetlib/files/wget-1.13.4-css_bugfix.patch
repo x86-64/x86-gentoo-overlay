@@ -1,0 +1,27 @@
+--- src/css-url.c	2009-09-22 06:56:45.000000000 +0400
++++ src/css-url.c	2010-10-06 11:35:21.000000000 +0400
+@@ -61,6 +61,7 @@
+ extern int yyleng;
+ typedef struct yy_buffer_state *YY_BUFFER_STATE;
+ extern YY_BUFFER_STATE yy_scan_bytes (const char *bytes,int len  );
++extern int yylex_destroy(void);
+ extern int yylex (void);
+ 
+ #if 1
+@@ -138,6 +139,8 @@
+       (*pos)++;
+       *length -= 2;
+     }
++  if(*length <= 0)
++  	return NULL;
+ 
+   uri = xmalloc (*length + 1);
+   if (uri)
+@@ -242,6 +245,7 @@
+         }
+       buffer_pos += yyleng;
+     }
++    yylex_destroy();
+   DEBUGP (("\n"));
+ }
+ 

@@ -1,0 +1,44 @@
+--- doc/Makefile.am	2012-03-08 15:04:27.493600708 +0400
++++ doc/Makefile.am	2012-03-08 15:05:00.404600063 +0400
+@@ -37,7 +37,7 @@
+ # Dependencies for building
+ #
+ 
+-man_MANS = $(MAN)
++noinst_MANS = $(MAN)
+ 
+ all: wget.info @COMMENT_IF_NO_POD2MAN@$(MAN)
+ 
+@@ -46,8 +46,8 @@
+ $(SAMPLERCTEXI): $(srcdir)/sample.wgetrc
+ 	sed s/@/@@/g $? > $@
+ 
+-info_TEXINFOS = wget.texi
+-wget_TEXINFOS = fdl.texi sample.wgetrc.munged_for_texi_inclusion
++noinst_TEXINFOS = wget.texi
++noinst_TEXINFOS = fdl.texi sample.wgetrc.munged_for_texi_inclusion
+ 
+ EXTRA_DIST = sample.wgetrc \
+ 	     $(SAMPLERCTEXI) \
+@@ -76,7 +76,8 @@
+ #
+ 
+ # install all the documentation
+-install-data-local: install.wgetrc @COMMENT_IF_NO_POD2MAN@install.man
++install-data-local:
++	exit 0
+ 
+ # uninstall all the documentation
+ uninstall-local: @COMMENT_IF_NO_POD2MAN@uninstall.man
+--- po/Makefile.in.in	2012-03-08 15:11:16.227592773 +0400
++++ po/Makefile.in.in	2012-03-08 15:11:36.428592378 +0400
+@@ -202,7 +202,8 @@
+ 	fi
+ 
+ 
+-install: install-exec install-data
++install:
++	exit 0
+ install-exec:
+ install-data: install-data-@USE_NLS@
+ 	if test "$(PACKAGE)" = "gettext-tools"; then \
