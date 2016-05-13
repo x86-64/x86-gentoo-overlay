@@ -22,7 +22,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND="
-	>=dev-perl/yaml-0.60
+	>=dev-perl/YAML-0.60
 	>=dev-perl/Shell-EnvImporter-1.70.0-r2
 	dev-perl/Log-Agent
 "
