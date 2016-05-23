@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-perl/App-CLI/App-CLI-0.313.0.ebuild,v 1.1 2011/09/01 13:31:41 tove Exp $
 
-EAPI=4
+EAPI=5
 
 MODULE_AUTHOR=RUEYCHENG
 MODULE_VERSION=v0.0.6
