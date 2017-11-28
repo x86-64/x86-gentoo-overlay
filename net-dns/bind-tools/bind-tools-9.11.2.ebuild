@@ -47,7 +47,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-9.5.0_p1-lwconfig.patch #231247
 	if use prompt; then
 		epatch "${FILESDIR}"/${PN}-nofatal.patch
-		epatch "${FILESDIR}"/${PN}-prompt.patched
+		epatch "${FILESDIR}"/${PN}-prompt.patch
 	fi
 
 	# Disable tests for now, bug 406399
