@@ -8,20 +8,12 @@
  
  static char domainopt[DNS_NAME_MAXTEXT];
  
-@@ -167,6 +168,7 @@
- "        q-opt    is one of:\n"
- "                 -x dot-notation     (shortcut for reverse lookups)\n"
- "                 -i                  (use IP6.INT for IPv6 reverse lookups)\n"
-+"                 -s                  (show prompt)\n"
- "                 -f filename         (batch mode)\n"
- "                 -b address[#port]   (bind to source address/port)\n"
- "                 -p port             (specify port number)\n"
 @@ -1184,7 +1186,7 @@
  /*%
   * #ISC_TRUE returned if value was used
   */
--static const char *single_dash_opts = "46dhimnv";
-+static const char *single_dash_opts = "46dhimnvs";
+-static const char *single_dash_opts = "46dhimnuv";
++static const char *single_dash_opts = "46dhimnuvs";
  static const char *dash_opts = "46bcdfhikmnptvyx";
  static isc_boolean_t
  dash_option(char *option, char *next, dig_lookup_t **lookup,
