@@ -4,8 +4,8 @@
 
 EAPI=5
 
-MODULE_AUTHOR=DESPAIR
-MODULE_VERSION=2.48
+MODULE_AUTHOR=NALOBIN
+MODULE_VERSION=2.99011
 inherit perl-module eutils
 
 DESCRIPTION="Net-Whois-Raw module"
@@ -16,7 +16,6 @@ IUSE=""
 
 DEPEND="
 	dev-perl/Regexp-IPv6
-	>=virtual/perl-Module-Build-0.400.0
 	dev-lang/perl"
 
 src_prepare(){
