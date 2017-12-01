@@ -17,7 +17,3 @@ IUSE=""
 DEPEND="
 	dev-perl/Regexp-IPv6
 	dev-lang/perl"
-
-src_prepare(){
-	epatch "${FILESDIR}/error_report.patch"
-}
