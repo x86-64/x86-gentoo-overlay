@@ -21,6 +21,6 @@ src_prepare(){
 }
 
 src_configure() {
-        econf \
-                --datadir="${D}/usr/share"
+	sed -i "s@libpostal_data download all @libpostal_data download all ${D}@" $S/src/Makefile.am
+        econf 
 }
