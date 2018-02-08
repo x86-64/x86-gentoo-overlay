@@ -33,7 +33,7 @@ src_install() {
 	doins -r *
 	fperms +x -R $LIBDIR/bin/
 	
-	sed "s/50000/500000/g" -i $LIBDIR/bin/crawl
+	sed "s/50000/500000/g" -i $D/$LIBDIR/bin/crawl
 
 	dodir /usr/bin/
 	dosym $LIBDIR/bin/nutch /usr/bin/nutch
