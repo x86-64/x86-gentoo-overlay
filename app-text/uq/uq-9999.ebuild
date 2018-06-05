@@ -4,9 +4,9 @@
 EAPI=5
 inherit git-2 eutils
 
-DESCRIPTION="B-Tree based uniq utility"
-HOMEPAGE="https://github.com/avz/uq"
-EGIT_REPO_URI="git://github.com/avz/uq.git"
+DESCRIPTION="B-Tree based uniq utility (from avz/uq)"
+HOMEPAGE="https://github.com/x86-64/uq"
+EGIT_REPO_URI="git://github.com/x86-64/uq.git"
 
 LICENSE="MIT"
 SLOT="1"
@@ -16,10 +16,6 @@ IUSE=""
 DEPEND="
 "
 RDEPEND="${DEPEND}"
-
-src_prepare(){
-	epatch "${FILESDIR}/uq-fwrite.patch"
-}
 
 src_compile(){
 	emake -j1 PREFIX=${D} CFLAGS="-c -O2 -Wall -Werror -I/usr/local/include -g $CFLAGS" || die
