@@ -1,9 +1,11 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
 
 inherit eutils autotools flag-o-matic toolchain-funcs
+
+PV=9.12.1
 
 MY_PN=${PN//-tools}
 MY_PV=${PV/_p/-P}
@@ -12,26 +14,29 @@ MY_P="${MY_PN}-${MY_PV}"
 
 DESCRIPTION="bind tools: dig, nslookup, host, nsupdate, dnssec-keygen"
 HOMEPAGE="http://www.isc.org/software/bind"
-SRC_URI="ftp://ftp.isc.org/isc/bind9/${MY_PV}/${MY_P}.tar.gz"
+SRC_URI="https://www.isc.org/downloads/file/${MY_P}/?version=tar-gz -> ${MY_PN}-${PV}.tar.gz"
 
 LICENSE="Apache-2.0 BSD BSD-2 GPL-2 HPND ISC MPL-2.0"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-IUSE="doc gost gssapi idn ipv6 libressl readline seccomp ssl urandom xml prompt"
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+IUSE="doc gost gssapi idn ipv6 libedit libressl readline seccomp ssl urandom xml"
 # no PKCS11 currently as it requires OpenSSL to be patched, also see bug 409687
 
 REQUIRED_USE="gost? ( !libressl ssl )"
 
 CDEPEND="
 	ssl? (
-		!libressl? ( dev-libs/openssl:0 )
-		libressl? ( dev-libs/libressl )
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:= )
 	)
-	gost? ( >=dev-libs/openssl-1.0.0:0[-bindist] )
+	gost? ( >=dev-libs/openssl-1.0.0:0=[-bindist] )
 	xml? ( dev-libs/libxml2 )
-	idn? ( net-dns/idnkit )
+	idn? ( <net-dns/idnkit-2:= )
 	gssapi? ( virtual/krb5 )
-	readline? ( sys-libs/readline:0= )
+	libedit? ( dev-libs/libedit )
+	!libedit? (
+		readline? ( sys-libs/readline:0= )
+	)
 	seccomp? ( sys-libs/libseccomp )"
 DEPEND="${CDEPEND}
 	virtual/pkgconfig"
@@ -44,18 +49,15 @@ S="${WORKDIR}/${MY_P}"
 RESTRICT="test"
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-9.5.0_p1-lwconfig.patch #231247
-	if use prompt; then
-		epatch "${FILESDIR}"/${PN}-nofatal.patch
-		epatch "${FILESDIR}"/${PN}-prompt.patch
-	fi
-
 	# Disable tests for now, bug 406399
 	sed -i '/^SUBDIRS/s:tests::' bin/Makefile.in lib/Makefile.in || die
 
 	# bug #220361
 	rm aclocal.m4
 	rm -rf libtool.m4/
+	
+	epatch "${FILESDIR}"/${PN}-nofatal.patch
+	epatch "${FILESDIR}"/${PN}-prompt.patch
 
 	mv configure.in configure.ac || die # configure.in is deprecated
 	eautoreconf
@@ -70,13 +72,22 @@ src_configure() {
 		myconf="${myconf} --with-randomdev=/dev/random"
 	fi
 
+	# bug 607400
+	if use libedit ; then
+		myconf+=' --with-readline=-ledit'
+	elif use readline ; then
+		myconf+=' --with-readline=-lreadline'
+	else
+		myconf+=' --without-readline'
+	fi
+
 	# bug 344029
 	append-cflags "-DDIG_SIGCHASE"
 
 	# localstatedir for nsupdate -l, bug 395785
 	tc-export BUILD_CC
 	econf \
-		--localstatedir=/var \
+		--localstatedir="${EPREFIX}"/var \
 		--without-python \
 		--without-libjson \
 		--without-zlib \
@@ -86,7 +97,7 @@ src_configure() {
 		$(use_with idn) \
 		$(usex idn --with-idnlib=-lidnkit '') \
 		$(use_enable seccomp) \
-		$(use_with ssl openssl) \
+		$(use_with ssl openssl "${EPREFIX}"/usr) \
 		$(use_with xml libxml2) \
 		$(use_with gssapi) \
 		$(use_with readline) \
