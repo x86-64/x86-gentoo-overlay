@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit flag-o-matic libtool
+inherit flag-o-matic libtool autotools
 
 DESCRIPTION="Generic framework to farm out work to other machines"
 HOMEPAGE="http://www.gearman.org/"
@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="debug tcmalloc +memcache drizzle sqlite tokyocabinet postgres"
 
 RDEPEND="dev-libs/libevent
-	>=dev-libs/boost-1.39
+	=dev-libs/boost-1.65.0
 	|| ( >=sys-apps/util-linux-2.16 <sys-libs/e2fsprogs-libs-1.41.8 )
 	tcmalloc? ( dev-util/google-perftools )
 	memcache? ( >=dev-libs/libmemcached-0.47 )
@@ -32,8 +32,9 @@ pkg_setup() {
 }
 
 src_prepare() {
-	sed "s/boost_major_version=\`.*/boost_major_version=1_65/" -i ${S}/m4/boost.m4
+	sed "/cat conftest.i/a boost_cv_lib_version=1_65" -i ${S}/m4/boost.m4
 	elibtoolize
+	eautoreconf
 }
 
 src_configure() {
@@ -58,6 +59,10 @@ src_configure() {
 		$(use_with sqlite sqlite3) \
 		$(use_enable tokyocabinet libtokyocabinet) \
 		$(use_enable postgres libpq)
+}
+
+src_compile() {
+	emake CXXFLAGS="$CXXFLAGS -fpermissive"
 }
 
 src_test() {
