@@ -14,11 +14,13 @@ KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 RDEPEND="
-        >=dev-perl/ZMQ-1.020
-        >=dev-perl/ZMQ-LibZMQ4-0.010
+	dev-perl/URI
+	dev-perl/ZMQ-Constants
+	>=dev-perl/ZMQ-LibZMQ4-0.010
 "
 DEPEND="
-        ${RDEPEND}
-        virtual/perl-ExtUtils-MakeMaker
-        virtual/perl-Test-Simple
+	${RDEPEND}
+	virtual/perl-ExtUtils-MakeMaker
+	dev-perl/Test-Pod
+	virtual/perl-Test-Simple
 "
