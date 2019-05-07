@@ -32,3 +32,7 @@ DEPEND="${RDEPEND}
 "
 
 SRC_TEST=do
+
+src_prepare() {
+	sed "/BEGIN/a use lib '.';" -i ${S}/Makefile.PL
+}
