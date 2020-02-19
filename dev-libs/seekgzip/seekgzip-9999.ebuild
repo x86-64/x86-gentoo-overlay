@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit git-2
+inherit git-r3
 
 DESCRIPTION="Seekgzip library"
 HOMEPAGE="https://github.com/chokkan/seekgzip"

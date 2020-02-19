@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit git-2 eutils
+inherit git-r3 eutils
 
 DESCRIPTION="Casperjs"
 HOMEPAGE="http://casperjs.org/"

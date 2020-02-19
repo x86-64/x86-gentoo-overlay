@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit git-2 eutils
+inherit git-r3 eutils
 
 DESCRIPTION="Leveldb"
 HOMEPAGE="http://code.google.com/p/leveldb/"

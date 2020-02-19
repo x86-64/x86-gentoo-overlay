@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit autotools git-2
+inherit autotools git-r3
 
 DESCRIPTION="libpostal: international street address NLP"
 HOMEPAGE="https://github.com/openvenues/libpostal"

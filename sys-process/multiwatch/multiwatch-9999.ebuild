@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit autotools git-2
+inherit autotools git-r3
 
 DESCRIPTION="Multiwatch forks multiple instance of one application and keeps them running"
 HOMEPAGE="https://github.com/lighttpd/multiwatch"

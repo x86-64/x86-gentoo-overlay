@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v3
 
 EAPI=5
-inherit git-2 eutils
+inherit git-r3 eutils
 
 DESCRIPTION="B-Tree based uniq utility (from avz/uq)"
 HOMEPAGE="https://github.com/x86-64/uq"

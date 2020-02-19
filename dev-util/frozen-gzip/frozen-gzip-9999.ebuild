@@ -5,7 +5,7 @@ EAPI=5
 WANT_AUTOCONF=2.5
 WANT_AUTOMAKE=1.11
 
-inherit autotools git-2
+inherit autotools git-r3
 
 DESCRIPTION="Gzip files support in frozen, using seekgzip library"
 HOMEPAGE="https://github.com/x86-64/frozen-gzip"

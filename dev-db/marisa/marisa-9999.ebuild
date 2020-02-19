@@ -5,7 +5,7 @@ EAPI=5
 WANT_AUTOCONF=2.5
 WANT_AUTOMAKE=1.11
 
-inherit autotools git-2
+inherit autotools git-r3
 
 DESCRIPTION="Memory efficient trie library for dictionary compression using nested patricia LOUDS"
 HOMEPAGE="https://github.com/nokuno/marisa-trie"
