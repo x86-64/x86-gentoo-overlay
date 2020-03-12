@@ -8,14 +8,14 @@
  
  static char domainopt[DNS_NAME_MAXTEXT];
  
-@@ -1184,7 +1186,7 @@
+@@ -1551,7 +1551,7 @@
  /*%
-  * #ISC_TRUE returned if value was used
+  * #true returned if value was used
   */
 -static const char *single_dash_opts = "46dhimnruv";
 +static const char *single_dash_opts = "46dhimnruvs";
- static const char *dash_opts = "46bcdfhikmnptvyx";
- static isc_boolean_t
+ static const char *dash_opts = "46bcdfhikmnpqrtvyx";
+ static bool
  dash_option(char *option, char *next, dig_lookup_t **lookup,
 @@ -1247,6 +1249,9 @@
  			help();
