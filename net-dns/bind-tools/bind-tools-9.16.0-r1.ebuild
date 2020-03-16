@@ -3,8 +3,6 @@
 
 EAPI=7
 
-PV=9.14.8
-
 inherit autotools flag-o-matic toolchain-funcs
 
 MY_PN=${PN//-tools}
@@ -14,15 +12,16 @@ MY_P="${MY_PN}-${MY_PV}"
 
 DESCRIPTION="bind tools: dig, nslookup, host, nsupdate, dnssec-keygen"
 HOMEPAGE="https://www.isc.org/software/bind"
-SRC_URI="https://downloads.isc.org/isc/bind9/${PV}/${MY_P}.tar.gz"
+SRC_URI="https://downloads.isc.org/isc/bind9/${PV}/${MY_P}.tar.xz"
 
 LICENSE="Apache-2.0 BSD BSD-2 GPL-2 HPND ISC MPL-2.0"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="+caps doc gssapi idn ipv6 libedit libressl readline xml"
 # no PKCS11 currently as it requires OpenSSL to be patched, also see bug 409687
 
 COMMON_DEPEND="
+	dev-libs/libuv:=
 	caps? ( sys-libs/libcap )
 	!libressl? ( dev-libs/openssl:= )
 	libressl? ( dev-libs/libressl:= )
@@ -55,9 +54,6 @@ src_prepare() {
 	# bug #220361
 	rm aclocal.m4 || die
 	rm -rf libtool.m4/ || die
-
-	epatch "${FILESDIR}"/${PN}-nofatal.patch
-	epatch "${FILESDIR}"/${PN}-prompt.patch
 
 	eautoreconf
 }

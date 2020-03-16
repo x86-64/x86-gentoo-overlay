@@ -3,8 +3,6 @@
 
 EAPI=7
 
-PV=9.14.8
-
 inherit autotools flag-o-matic toolchain-funcs
 
 MY_PN=${PN//-tools}
@@ -55,9 +53,6 @@ src_prepare() {
 	# bug #220361
 	rm aclocal.m4 || die
 	rm -rf libtool.m4/ || die
-
-	epatch "${FILESDIR}"/${PN}-nofatal.patch
-	epatch "${FILESDIR}"/${PN}-prompt.patch
 
 	eautoreconf
 }
