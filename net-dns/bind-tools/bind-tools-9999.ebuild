@@ -44,6 +44,11 @@ S="${WORKDIR}/${MY_P}"
 # bug 479092, requires networking
 RESTRICT="test"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-nofatal.patch"
+	"${FILESDIR}/${PN}-prompt.patch"
+)
+
 src_prepare() {
 	default
 
@@ -55,9 +60,6 @@ src_prepare() {
 	# bug #220361
 	rm aclocal.m4 || die
 	rm -rf libtool.m4/ || die
-
-	epatch "${FILESDIR}"/${PN}-nofatal.patch
-	epatch "${FILESDIR}"/${PN}-prompt.patch
 
 	eautoreconf
 }
