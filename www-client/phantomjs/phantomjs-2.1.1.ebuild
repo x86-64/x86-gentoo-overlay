@@ -7,6 +7,7 @@ EAPI="2"
 DESCRIPTION="headless WebKit with JavaScript API"
 HOMEPAGE="http://www.phantomjs.org/"
 SRC_URI="http://phantomjs.googlecode.com/files/${P}-linux-x86_64.tar.bz2"
+SRC_URI="https://bitbucket.org/ariya/phantomjs/downloads/${P}-linux-x86_64.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
