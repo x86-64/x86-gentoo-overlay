@@ -83,7 +83,7 @@ COMMON_DEPEND="
 		smbkrb5passwd? (
 			!libressl? ( dev-libs/openssl:0= )
 			libressl? ( dev-libs/libressl:0= )
-			kerberos? ( app-crypt/heimdal )
+			kerberos? ( virtual/krb5 )
 			)
 		kerberos? (
 			virtual/krb5
