@@ -29,7 +29,7 @@ src_install(){
 	default
 
 	dodir /etc/auks/
-	cp "${S}"/etc/*.example "${D}"/etc/auks/
+	cp "${S}"/etc/*.example "${D}"/etc/
 
 	newinitd "${FILESDIR}"/init.d.auksd auksd
 	newinitd "${FILESDIR}"/init.d.auksdrenewer auksdrenewer
