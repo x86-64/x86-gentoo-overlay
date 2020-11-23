@@ -1,0 +1,32 @@
+#!/sbin/openrc-run
+
+PIDFILE=/var/run/$SVCNAME.pid
+DAEMON=/usr/bin/$SVCNAME
+DAEMON_ARGS=${DAEMON_ARGS:-}
+USER=${USER:-root}
+GROUP=${GROUP:-root}
+
+depend() {
+	need net
+	use logger
+}
+
+start() {
+	ebegin "Starting $SVCNAME"
+		start-stop-daemon \
+			--start --quiet --background \
+			--user $USER \
+			--group $GROUP \
+			--pidfile $PIDFILE --make-pidfile \
+			--startas $SVCNAME \
+			--exec /bin/bash -- -c "trap 'kill -TERM \$P' INT TERM; $DAEMON $DAEMON_ARGS 2>&1 | logger & P=\$(jobs -p); wait \$P; trap - INT TERM; wait \$P;" 
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping $SVCNAME"
+		start-stop-daemon \
+			--stop --quiet --pidfile ${PIDFILE}
+	eend $?
+}
+

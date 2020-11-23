@@ -31,7 +31,7 @@ src_install(){
 	dodir /etc/auks/
 	cp "${S}"/etc/*.example "${D}"/etc/auks/
 
-	newinitd "${S}"/etc/init.d.auksd auksd
-	newinitd "${S}"/etc/init.d.auksdrenewer auksdrenewer
-	newinitd "${S}"/etc/init.d.aukspriv aukspriv
+	newinitd "${FILESDIR}"/init.d.auksd auksd
+	newinitd "${FILESDIR}"/init.d.auksdrenewer auksdrenewer
+	newinitd "${FILESDIR}"/init.d.aukspriv aukspriv
 }
