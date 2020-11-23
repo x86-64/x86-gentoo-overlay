@@ -24,3 +24,14 @@ src_prepare(){
 	sed 's/krb5_rc_close/k5_rc_close/' -i src/api/auks/auks_krb5_stream.c
 	default
 }
+
+src_install(){
+	default
+
+	dodir /etc/auks/
+	cp "${S}"/etc/*.example "${D}"/etc/auks/
+
+	newinitd "${S}"/etc/init.d.auksd auksd
+	newinitd "${S}"/etc/init.d.auksdrenewer auksdrenewer
+	newinitd "${S}"/etc/init.d.aukspriv aukspriv
+}
