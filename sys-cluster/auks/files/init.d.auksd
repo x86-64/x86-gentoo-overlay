@@ -1,7 +1,7 @@
 #!/sbin/openrc-run
 
 PIDFILE=/var/run/$SVCNAME.pid
-DAEMON=/usr/bin/$SVCNAME
+DAEMON=/usr/sbin/$SVCNAME
 DAEMON_ARGS=${DAEMON_ARGS:-}
 USER=${USER:-root}
 GROUP=${GROUP:-root}

@@ -32,6 +32,6 @@ src_install(){
 	cp "${S}"/etc/*.example "${D}"/etc/
 
 	newinitd "${FILESDIR}"/init.d.auksd auksd
-	newinitd "${FILESDIR}"/init.d.auksdrenewer auksdrenewer
-	newinitd "${FILESDIR}"/init.d.aukspriv aukspriv
+	newinitd "${FILESDIR}"/init.d.auksd auksdrenewer
+	newinitd "${FILESDIR}"/init.d.auksd aukspriv
 }
