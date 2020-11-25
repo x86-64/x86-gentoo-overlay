@@ -43,4 +43,9 @@ src_install(){
 	newinitd "${FILESDIR}"/init.d.auksd auksd
 	newinitd "${FILESDIR}"/init.d.auksd auksdrenewer
 	newinitd "${FILESDIR}"/init.d.auksd aukspriv
+
+	if use slurm; then
+		dodir /etc/slurm/plugstack.conf.d/
+		cp "${S}"/src/plugins/slurm/slurm-spank-auks.conf "${D}"/etc/slurm/plugstack.conf.d/auks.conf.example
+	fi
 }
