@@ -6,7 +6,7 @@ EAPI=7
 if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/SchedMD/slurm.git"
 	INHERIT_GIT="git-r3"
-	MY_P="${P}"
+	MY_P="${PV}"
 else
 	if [[ ${PV} == *pre* || ${PV} == *rc* ]]; then
 		MY_PV=$(ver_rs '-0.') # pre-releases or release-candidate
