@@ -207,6 +207,7 @@ src_install() {
 	# install systemd files
 	systemd_newtmpfilesd "${FILESDIR}/slurm.tmpfiles" slurm.conf
 	systemd_dounit etc/slurmd.service etc/slurmctld.service etc/slurmdbd.service
+	newlib.so contribs/nss_slurm/.libs/libnss_slurm.so.2 libnss_slurm.so.2
 }
 
 pkg_preinst() {
