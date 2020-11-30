@@ -22,6 +22,10 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+PATCHES=(
+	"${FILESDIR}"/patch-43.patch
+)
+
 src_prepare(){
 	eautoreconf
 	sed 's/krb5_rc_resolve_full/k5_rc_resolve/' -i src/api/auks/auks_krb5_stream.c
