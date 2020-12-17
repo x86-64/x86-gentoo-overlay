@@ -1,16 +1,14 @@
---- a/src/plugins/slurm/slurm-spank-auks.c	2020-12-17 07:07:58.000000000 +0000
-+++ b/src/plugins/slurm/slurm-spank-auks.c	2020-12-17 07:12:44.000000000 +0000
-@@ -300,7 +300,11 @@
- 		argv[0]= BINDIR "/auks" ;
- 		argv[1]="-R";argv[2]="loop";
+--- a/src/plugins/slurm/slurm-spank-auks.c	2020-12-17 07:34:45.000000000 +0000
++++ b/src/plugins/slurm/slurm-spank-auks.c	2020-12-17 07:37:01.000000000 +0000
+@@ -297,8 +297,9 @@
+ 		sigemptyset(&mask);
+ 		sigprocmask(SIG_SETMASK, &mask, NULL);
+ 		char *argv[4];
+-		argv[0]= BINDIR "/auks" ;
+-		argv[1]="-R";argv[2]="loop";
++		argv[0]= "/bin/bash";
++		argv[1]="-c";
++		argv[2]= "exec " BINDIR "/auks -R loop";
  		argv[3]=NULL;
--		setenv("KRB5CCNAME",auks_credcache,1);
-+		char *auks_file_const = "FILE:";
-+		char *auks_credcache_file = malloc(strlen(auks_file_const) + strlen(auks_credcache) + 1);
-+		strcpy(auks_credcache_file, auks_file_const);
-+		strcat(auks_credcache_file, auks_credcache);
-+		setenv("KRB5CCNAME",auks_credcache_file,1);
+ 		setenv("KRB5CCNAME",auks_credcache,1);
  		chdir("/");
- 		execv(argv[0],argv);
- 		xerror("unable to exec credential renewer (%s)",argv[0]);
-
