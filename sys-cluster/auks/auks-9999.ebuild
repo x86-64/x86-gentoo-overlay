@@ -24,6 +24,7 @@ RDEPEND="${DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}"/patch-43.patch
+	"${FILESDIR}"/patch-43-2.patch
 )
 
 src_prepare(){

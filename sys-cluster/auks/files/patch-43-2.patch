@@ -1,0 +1,16 @@
+--- a/src/plugins/slurm/slurm-spank-auks.c	2020-12-17 07:07:58.000000000 +0000
++++ b/src/plugins/slurm/slurm-spank-auks.c	2020-12-17 07:12:44.000000000 +0000
+@@ -300,7 +300,11 @@
+ 		argv[0]= BINDIR "/auks" ;
+ 		argv[1]="-R";argv[2]="loop";
+ 		argv[3]=NULL;
+-		setenv("KRB5CCNAME",auks_credcache,1);
++		char *auks_file_const = "FILE:";
++		char *auks_credcache_file = malloc(strlen(auks_file_const) + strlen(auks_credcache) + 1);
++		strcpy(auks_credcache_file, auks_file_const);
++		strcat(auks_credcache_file, auks_credcache);
++		setenv("KRB5CCNAME",auks_credcache_file,1);
+ 		chdir("/");
+ 		execv(argv[0],argv);
+ 		xerror("unable to exec credential renewer (%s)",argv[0]);
+
