@@ -60,6 +60,7 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 	dev-ruby/sinatra
 	dev-ruby/thin
 	dev-ruby/nokogiri
+	<=sys-devel/bison-3.6.4
 	sunstone? ( dev-ruby/rack )
 	|| ( app-cdr/cdrkit app-cdr/cdrtools )
 	sqlite? ( dev-ruby/sqlite3 )
@@ -122,7 +123,6 @@ src_unpack() {
 src_prepare() {
 	# install missing source file
 	#cp "${FILESDIR}"/${P}/parsers/* "${S}"/src/parsers/ || die "copy parsers files failed"
-	sed "s/template_syntax.hh/template_syntax.h/g" -i "${S}"/src/parsers/*.cc
 
 	# set correct lib path
 	use docker && make -C src/docker_machine/src/docker_machine vendor
@@ -192,7 +192,9 @@ src_install() {
 	# Installing Opennebula
 	DESTDIR="${T}" ./install.sh -u ${ONEUSER} -g ${ONEGROUP} || die "install opennebula core failed"
 	use extras && DESTDIR="${T}" ./install.sh -u ${ONEUSER} -g ${ONEGROUP} -c || die "install opennebula client tools failed"
-	use docker && DESTDIR="${T}" ./install.sh -u ${ONEUSER} -g ${ONEGROUP} -e -k || die "install docker machine failed"
+	if use docker; then
+	  DESTDIR="${T}" ./install.sh -u ${ONEUSER} -g ${ONEGROUP} -e -k || die "install docker machine failed"
+	fi
 
 	pushd "${T}" >/dev/null
 	# Clean files
