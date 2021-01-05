@@ -54,7 +54,6 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 	dev-db/sqlite
 	net-misc/openssh
 	net-fs/nfs-utils
-	dev-db/mariadb
 	net-libs/zeromq
 	dev-ruby/json
 	dev-ruby/sequel
@@ -123,6 +122,7 @@ src_unpack() {
 src_prepare() {
 	# install missing source file
 	#cp "${FILESDIR}"/${P}/parsers/* "${S}"/src/parsers/ || die "copy parsers files failed"
+	sed "s/template_syntax.hh/template_syntax.h/g" -i "${S}"/src/parsers/*.cc
 
 	# set correct lib path
 	use docker && make -C src/docker_machine/src/docker_machine vendor
