@@ -128,6 +128,7 @@ src_prepare() {
 
 	# install missing source file
 	#cp "${FILESDIR}"/${P}/parsers/* "${S}"/src/parsers/ || die "copy parsers files failed"
+	sed "s/template_syntax.hh/template_syntax.h/g" -i "${S}"/src/parsers/*.cc
 
 	# set correct lib path
 	use docker && make -C src/docker_machine/src/docker_machine vendor
