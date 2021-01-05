@@ -39,6 +39,7 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 		dev-ruby/treetop
 		dev-ruby/xml-simple
 		dev-ruby/zendesk_api
+		dev-ruby/ffi
 		dev-ruby/ffi-rzmq
 		dev-ruby/ffi-rzmq-core
 		dev-ruby/rqrcode
