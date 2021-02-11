@@ -15,19 +15,33 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="debug examples pie"
 
+G="$WORKDIR/$P/src/$EGO_PN"
+
 pkg_setup() {
 	enewgroup traefik
 	enewuser traefik -1 -1 -1 traefik
 }
 
+src_unpack(){
+	golang-vcs_src_unpack
+	cd $G
+	GO111MODULE=off go get github.com/containous/go-bindata/...
+	PATH="$HOME/go/bin:$PATH"
+	go generate || die
+	go build ./cmd/traefik || die
+}
+
 src_install() {
-	dobin traefik
+	dobin $G/traefik
 	use debug && dostrip -x /usr/bin/traefik
 	einstalldocs
 
 	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
 	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
 	systemd_dounit "${FILESDIR}/${PN}.service"
+
+	insinto /etc/traefik
+	newins $G/traefik.sample.toml traefik.toml.example
 
 	if use examples; then
 		docinto examples
