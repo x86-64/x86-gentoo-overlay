@@ -27,6 +27,7 @@ src_unpack(){
 	cd $G
 	GO111MODULE=off go get github.com/containous/go-bindata/...
 	PATH="$HOME/go/bin:$PATH"
+	export GOPATH="${EGO_STORE_DIR}"
 	go generate || die
 	go build ./cmd/traefik || die
 }
