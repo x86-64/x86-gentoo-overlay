@@ -1,6 +1,6 @@
 --- a/src/plugins/slurm/slurm-spank-auks.c	2021-02-24 09:12:53.780172640 +0300
 +++ b/src/plugins/slurm/slurm-spank-auks.c	2021-02-24 09:24:34.190207449 +0300
-@@ -287,12 +287,38 @@
+@@ -287,12 +287,37 @@
  		return -1;
  		break;
  	}
@@ -23,14 +23,13 @@
  		xerror("unable to launch renewer process");
  	}
  	else if ( renewer_pid == 0 ) {
-+		/* change to user uid and gid before getting cred */
-+		if ( setegid(gid) ) {
++		if ( setgid(gid) ) {
 +			xerror("unable to switch to user gid : %s",
 +			       strerror(errno));
 +			exit(1);
 +		}
 +
-+		if ( seteuid(uid) ) {
++		if ( setuid(uid) ) {
 +			xerror("unable to switch to user uid : %s",
 +			       strerror(errno));
 +			exit(1);
