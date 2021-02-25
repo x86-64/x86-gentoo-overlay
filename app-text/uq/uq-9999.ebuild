@@ -18,10 +18,10 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_compile(){
-	emake -j1 PREFIX=${D} CFLAGS="-c -O2 -Wall -Werror -I/usr/local/include -g $CFLAGS" || die
+	emake -j1 PREFIX=${D}/${EPREFIX} CFLAGS="-c -O2 -Wall -Werror -I/usr/local/include -g $CFLAGS" || die
 }
 
 src_install(){
 	dodir /bin
-	emake -j1 PREFIX=${D} install || die
+	emake -j1 PREFIX=${D}/${EPREFIX} install || die
 }
